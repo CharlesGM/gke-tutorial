@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gke-tutorial-deployment
+  namespace: default
+  labels:
+    app: gke-tutorial-deployment
+spec:
+  replicas: 1 # number of pods
+  selector:
+    matchLabels:
+      app: gke-tutorial-deployment
+  template:
+    metadata:
+      labels:
+        app: gke-tutorial-deployment
+    spec:
+      containers:
+        - name: gke-tutorial-image
+          image: gcr.io/sigma-heuristic-290310/gke-tutorial-image
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              protocol: TCP
